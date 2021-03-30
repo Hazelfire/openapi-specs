@@ -1,0 +1,14 @@
+semantic:
+  file: specs/semantic.yaml
+  defaults: {}
+up:
+  file: specs/up.yaml
+  defaults:
+    Authorization:
+      command: echo Bearer $(pass Up_token)
+scopus:
+  file: specs/scopus.yaml
+  defaults:
+    X-ELS-APIKey:
+      command: pass "Eslevier API Key"
+      
