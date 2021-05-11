@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  contact:
+    name: Sam Nolan
+  description: Searches the IEEE Api
+  title: IEEE digital library
+  version: v1
+servers:
+- description: Production
+  url: https://ieeexploreapi.ieee.org/api/v1/search/articles
+paths:
+  /:
+    get:
+      description: Searches DBLP for papers
+      operationId: search 
+      parameters:
+      - description: Api Key
+        in: query
+        name: apiKey
+        schema:
+          type: string
+      - description: Query
+        in: query
+        name: querytext
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+          description: OK
+components:
+  schemas:
+    SearchResponse:
+      description: The response
+      type: object
+      properties: {}

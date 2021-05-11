@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  contact:
+    name: Sam Nolan
+  description: Searches the Springer API
+  title: Sringer api
+  version: v1
+servers:
+- description: Production
+  url: http://api.springernature.com
+paths:
+  /meta/v2/{output}:
+    get:
+      description: Searches DBLP for papers
+      operationId: search 
+      parameters:
+      - description: Output format
+        in: path
+        name: output
+        required: true
+        schema:
+          type: string
+          enum: ["json", "pam"]
+      - description: Api Key
+        in: query
+        name: api_key
+        schema:
+          type: string
+      - description: Query
+        in: query
+        name: q
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+          description: OK
+components:
+  schemas:
+    SearchResponse:
+      description: The details of the paper
+      type: object
+      properties: {}

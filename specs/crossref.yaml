@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  contact:
+    name: Sam Nolan
+  description: Searches Crossref
+  title: Crossref difital library
+  version: v1
+servers:
+- description: Production
+  url: https://api.crossref.org/works
+paths:
+  /:
+    get:
+      description: Searches Crossref for papers
+      operationId: search 
+      parameters:
+      - description: Polite email address to contact user
+        in: query
+        name: mailto
+        schema:
+          type: string
+      - description: Query
+        in: query
+        name: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+          description: OK
+components:
+  schemas:
+    SearchResponse:
+      description: The response
+      type: object
+      properties: {}

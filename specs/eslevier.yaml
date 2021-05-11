@@ -7,12 +7,48 @@ info:
   version: v1
 servers:
 - description: Production
-  url: https://api.elsevier.com/content/search/scopus
+  url: https://api.elsevier.com/content
 paths:
-  /:
+  /metadata/article:
+    get:
+      description: Searches Science Direct for papers
+      operationId: metadata 
+      parameters:
+      - description: fields
+        in: query
+        name: fields
+        schema:
+          type: string
+      - description: Accepts Header
+        in: header
+        name: Accept
+        schema:
+          type: string
+          enum: ["application/json", "application/atom+xml", "application/xml"]
+          default: "application/json"
+      - description: The api key
+        in: header
+        name: X-ELS-APIKey
+        required: true
+        schema:
+          type: string
+      # Now for query paramaters
+      - description: Query
+        name: query
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+          description: OK
+  /search/scopus/:
     get:
       description: Searches Scopus for papers
-      operationId: search 
+      operationId: scopus 
       parameters:
       - description: Accepts Header
         in: header

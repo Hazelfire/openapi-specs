@@ -5,10 +5,31 @@ up:
   file: specs/up.yaml
   defaults:
     Authorization:
-      command: echo Bearer $(pass Up_token)
-scopus:
-  file: specs/scopus.yaml
+      command: 'echo -n "Bearer $(pass Up_token)"'
+eslevier:
+  file: specs/eslevier.yaml
   defaults:
     X-ELS-APIKey:
       command: pass "Eslevier API Key"
-      
+dblp:
+  file: specs/dblp.yaml
+  defaults:
+    format:
+      command: echo -n json
+ieee:
+  file: specs/ieee.yaml
+  defaults:
+    apiKey:
+      command: pass "IEEE Explore API Key"
+crossref:
+  file: specs/crossref.yaml
+  defaults:
+    mailto:
+      command: echo -n "samnolan555@gmail.com"
+springer:
+  file: specs/springer.yaml
+  defaults:
+    api_key:
+      command: pass "Springer API Key"
+    output:
+      command: echo -n "json"

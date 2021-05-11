@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  contact:
+    name: Sam Nolan
+  description: Searches the DBLP api
+  title: Scopus Search API
+  version: v1
+servers:
+- description: Production
+  url: https://dblp.org/search/publ/api
+paths:
+  /:
+    get:
+      description: Searches DBLP for papers
+      operationId: search 
+      parameters:
+      - description: Query
+        in: query
+        name: q
+        schema:
+          type: string
+          enum: ["application/json", "application/atom+xml", "application/xml"]
+          default: "application/json"
+      - description: Format
+        in: query
+        name: format
+        schema:
+          type: string
+          enum: ["xml", "json", "jsonp"]
+          default: "xml"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+          description: OK
+components:
+  schemas:
+    SearchResponse:
+      description: The details of the paper
+      type: object
+      properties: {}
